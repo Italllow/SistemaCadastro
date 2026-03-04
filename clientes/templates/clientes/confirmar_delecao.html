@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Deleção - Sistema de Cadastro{% endblock %}
+
+{% block content %}
+<h1 class="header-title">⚠️ Confirmar Deleção</h1>
+
+{# Alerta com detalhes do cliente a ser deletado #}
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">Cuidado!</h4>
+    <p>Você está prestes a deletar o cliente:</p>
+    <hr>
+    <p>
+        <strong>Nome:</strong> {{ object.nome }}<br>
+        <strong>Email:</strong> {{ object.email }}<br>
+        <strong>Telefone:</strong> {{ object.telefone }}
+    </p>
+    <hr>
+    <p class="mb-0">
+        <strong>Esta ação não pode ser desfeita!</strong> Tem certeza de que deseja continuar?
+    </p>
+</div>
+
+{# Botões de ação para confirmar ou cancelar deleção #}
+<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <a href="{% url 'lista' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+    
+    <form method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-lg">
+            🗑️ Deletar Definitivamente
+        </button>
+    </form>
+</div>
+{% endblock %}
